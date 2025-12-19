@@ -1,4 +1,5 @@
 import UserSchema from '@/schema/user.schema';
+import '@/lib/db'
 import { NextResponse as res } from 'next/server';
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
