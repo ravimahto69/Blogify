@@ -1,11 +1,21 @@
 'use client'
-import { Button, Card, Form, Input } from 'antd'
+import { Button, Card, Form, Input, message } from 'antd'
+import axios from 'axios'
 import Link from 'next/link'
 import React from 'react'
+import { useRouter } from 'next/navigation'
 
 const SignUp = () => {
+  const router = useRouter()
 
-  const SignUp =(values)=>{
+  const SignUp = async (values)=>{
+    try{
+      await axios.post('/api/sign-up' ,values,{'Content-Type': 'application/json'})  
+      router.push('/login')
+    }
+    catch(err){
+      message.error(err.response.data.message || err.message)
+    }
      
       
   }
@@ -24,7 +34,7 @@ const SignUp = () => {
 
           <Form.Item
         label = "E-mail"
-        name= 'E-mail'
+        name= 'email'
         rules={[{required:true}]}
         >
         <Input size="large" placeholder='example123@gmail.com'/>
