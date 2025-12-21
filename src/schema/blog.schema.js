@@ -12,6 +12,8 @@
             type:String,
             required:true,
         }
+    },{
+        timestamps:true
     })
 
     mongoose.models = {}

@@ -1,12 +1,15 @@
-import Blog from '@/components/Blog'
+import Blog from '@/components/Blog';
 
-export const metadata ={
-  title : 'Blog'
-}
-const blog = () => {
-  return (
-    <div><Blog/></div>
-  )
-}
 
-export default blog
+
+const blog = async () => {
+  const res = await fetch(`${process.env.SERVER}/api/blog`, {
+    next: { revalidate: 86400 }, // ✅ REQUIRED
+  });
+
+  const data = await res.json();
+
+  return <Blog data={data} />;
+};
+
+export default blog;

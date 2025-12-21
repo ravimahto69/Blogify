@@ -18,7 +18,7 @@ export const POST = async(request)=>{
 }
 export const GET = async(request)=>{
     try{
-       const blogs = await BlogSchema.find()  
+       const blogs = await BlogSchema.find().sort({createdAt:-1}) 
        return res.json(blogs)
     }
     catch(err){

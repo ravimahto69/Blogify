@@ -1,8 +1,12 @@
+'use client'
+import { Card } from 'antd'
 import React from 'react'
 
-const Home = () => {
+const Home = ({ data }) => {
   return (
-    <div>Welcome to home</div>
+    <div>
+      Home Page
+    </div>
   )
 }
 

@@ -39,7 +39,7 @@ const Layout = ({children}) => {
     
   return (
     <div>
-        <nav className="bg-white shadow-lg  px-20  sticky top-0 left-0 w-full py-6 flex justify-between items-center">
+        <nav className="z-[2000] bg-white shadow-lg  px-20  sticky top-0 left-0 w-full py-6 flex justify-between items-center">
       <Link href="/" className="font-extrabold">NextApp</Link>
 
       <div className="flex items-center gap-10 font-bold ">
