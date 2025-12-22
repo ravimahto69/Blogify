@@ -1,5 +1,6 @@
-'use client'
-import React, { Children, useState } from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -8,43 +9,53 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
+import { useRouter, usePathname } from 'next/navigation';
+
 const { Header, Sider, Content } = Layout;
 
-
-
-
-const AdminLayout = ({children}) => {
+const AdminLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const menuItems = [
+    {
+      key: '/admin',
+      icon: <UserOutlined />,
+      label: 'Dashboard',
+    },
+    {
+      key: '/admin/blog',
+      icon: <VideoCameraOutlined />,
+      label: 'Blogs',
+    },
+    {
+      key: '/admin/upload',
+      icon: <UploadOutlined />,
+      label: 'Upload',
+    },
+  ];
+
   return (
-    <Layout>
+    <Layout style={{ minHeight: '100vh' }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
+        <div className="h-10 m-4 text-white text-center font-bold">
+          ADMIN
+        </div>
+
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
-          items={[
-            {
-              key: '1',
-              icon: <UserOutlined />,
-              label: 'nav 1',
-            },
-            {
-              key: '2',
-              icon: <VideoCameraOutlined />,
-              label: 'nav 2',
-            },
-            {
-              key: '3',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
-            },
-          ]}
+          selectedKeys={[pathname]}
+          items={menuItems}
+          onClick={({ key }) => router.push(key)}
         />
       </Sider>
+
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
           <Button
@@ -52,12 +63,13 @@ const AdminLayout = ({children}) => {
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
-              fontSize: '16px',
+              fontSize: 16,
               width: 64,
               height: 64,
             }}
           />
         </Header>
+
         <Content
           style={{
             margin: '24px 16px',
@@ -67,10 +79,11 @@ const AdminLayout = ({children}) => {
             borderRadius: borderRadiusLG,
           }}
         >
-        {children}
+          {children}
         </Content>
       </Layout>
     </Layout>
   );
 };
+
 export default AdminLayout;

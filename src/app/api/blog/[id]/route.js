@@ -1,6 +1,14 @@
 import BlogSchema from "@/schema/blog.schema";
 import { message } from "antd";
+import mongoose from "mongoose";
 import { NextResponse as res } from "next/server";
+
+
+const isId =(id)=>{
+  return mongoose.Types.ObjectId.isValid(id)
+}
+
+
 
 export const PUT = async (request,{params})=>{
     try{
@@ -27,7 +35,6 @@ export const PUT = async (request,{params})=>{
 export const DELETE = async (request, { params }) => {
   try {
     const { id } = await params   
-
     const blog = await BlogSchema.findByIdAndDelete(id)
 
     if (!blog) {
@@ -53,8 +60,10 @@ export const DELETE = async (request, { params }) => {
 
 export const GET = async (request,{params})=>{
   try{
-    const {id} = await params
-    const blog = await BlogSchema.findById(id)
+    const  IsMongoId = isId(params.id)
+    const query =(IsMongoId ? {_id:params.id} : {title: params.id.split("-").join(" ") })
+  
+    const blog = await BlogSchema.findOne(query)
     if(!blog){
         return res.json(
             {success:false,message:"Blog not found"},

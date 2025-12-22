@@ -3,7 +3,7 @@ import Home from '@/components/Home'
 
 
 export const metadata ={
-  title : 'HomePage'
+  title : 'Home'
 }
 
 const HomePage = () => {

@@ -1,5 +1,5 @@
 import BlogSchema from "@/schema/blog.schema.js";
-
+import '@/lib/db'
 import { NextResponse as res } from "next/server";
 
 export const POST = async(request)=>{
