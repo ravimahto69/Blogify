@@ -6,7 +6,7 @@ export const generateMetadata = ({params}) =>{
     title:`Ravi-Blog-`+params.slug
   }
 }
-
+// Dynamic Route Component
 const  SlugRoute = async ({params})=>{
   const res = await fetch (`${process.env.SERVER}/api/blog/${params.slug}`)
   let data = null
