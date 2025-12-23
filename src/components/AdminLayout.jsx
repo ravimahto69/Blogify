@@ -1,47 +1,50 @@
-'use client';
+'use client'
 
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
-import { Button, Layout, Menu, theme } from 'antd';
-import { useRouter, usePathname } from 'next/navigation';
+  HomeOutlined,
+  LogoutOutlined,
+} from '@ant-design/icons'
+import { Button, Layout, Menu, theme } from 'antd'
+import { useRouter, usePathname } from 'next/navigation'
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout
 
 const AdminLayout = ({ children }) => {
-  const [collapsed, setCollapsed] = useState(false);
-  const router = useRouter();
-  const pathname = usePathname();
+  const [collapsed, setCollapsed] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
 
   const {
     token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  } = theme.useToken()
 
+  // ✅ Sidebar menu items
   const menuItems = [
+    {
+      key: '/',
+      icon: <HomeOutlined />,
+      label: 'Home',
+    },
     {
       key: '/admin',
       icon: <UserOutlined />,
       label: 'Dashboard',
     },
-    {
-      key: '/admin/blog',
-      icon: <VideoCameraOutlined />,
-      label: 'Blogs',
-    },
-    {
-      key: '/admin/upload',
-      icon: <UploadOutlined />,
-      label: 'Upload',
-    },
-  ];
+  ]
+
+  // 🔴 Logout handler
+  const handleLogout = async () => {
+    await fetch('/api/logout', { method: 'POST' })
+    router.push('/login')
+  }
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
+      {/* ===== SIDEBAR ===== */}
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="h-10 m-4 text-white text-center font-bold">
           ADMIN
@@ -56,11 +59,24 @@ const AdminLayout = ({ children }) => {
         />
       </Sider>
 
+      {/* ===== MAIN LAYOUT ===== */}
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        {/* ===== HEADER ===== */}
+        <Header
+          style={{
+            padding: '0 16px',
+            background: colorBgContainer,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          {/* Left: sidebar toggle */}
           <Button
             type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            icon={
+              collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />
+            }
             onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: 16,
@@ -68,8 +84,19 @@ const AdminLayout = ({ children }) => {
               height: 64,
             }}
           />
+
+          {/* Right: Logout */}
+          <Button
+            danger
+            type="primary"
+            icon={<LogoutOutlined />}
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
         </Header>
 
+        {/* ===== CONTENT ===== */}
         <Content
           style={{
             margin: '24px 16px',
@@ -83,7 +110,7 @@ const AdminLayout = ({ children }) => {
         </Content>
       </Layout>
     </Layout>
-  );
-};
+  )
+}
 
-export default AdminLayout;
+export default AdminLayout

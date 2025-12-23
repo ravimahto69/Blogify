@@ -6,7 +6,7 @@ export const metadata = {
 
 const blog = async () => {
   const res = await fetch(`${process.env.SERVER}/api/blog`, {
-    next: { revalidate: 86400 }, // Revalidate every 24 hours
+    next: { revalidate: 600 }, // Revalidate every 24 hours
   });
   let data = null
   if(!blog.ok)

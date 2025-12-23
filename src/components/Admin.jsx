@@ -118,7 +118,7 @@ const Admin = () => {
       </div>
 
       {/* ---------- Blog List Section ---------- */}
-      <div className="col-span-5 flex flex-col space-y-6">
+      <div className="col-span-5 flex flex-col gap-5">
         {data?.map((item) => (
           <Card
             key={item._id}

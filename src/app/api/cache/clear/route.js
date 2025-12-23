@@ -10,5 +10,5 @@ export const POST =async (req) =>{
     deletedAt:Date.now()
    }
    })
-    return res.json(data    )
+    return res.json(data)
 }
