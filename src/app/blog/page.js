@@ -8,9 +8,10 @@ const blog = async () => {
   const res = await fetch(`${process.env.SERVER}/api/blog`, {
     next: { revalidate: 86400 }, // Revalidate every 24 hours
   });
-
-  const data = await res.json();
-
+  let data = null
+  if(!blog.ok)
+    data = []
+   data = await res.json();
   return <Blog data={data} />;
 };
 

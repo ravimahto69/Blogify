@@ -1,12 +1,13 @@
-import Contact from '@/components/Contact'
+import Contact from "@/components/Contact"
 
-export const metadata ={
-  title : 'Contact'
+export const metadata = {
+  title: "Contact",
 }
-const contact_page = () => {
+
+export default function ContactPage() {
   return (
-    <div><Contact/></div>
+    <div>
+      <Contact />
+    </div>
   )
 }
-
-export default contact_page

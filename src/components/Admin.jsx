@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
@@ -6,6 +6,7 @@ import Card from "antd/es/card/Card";
 import axios from "axios";
 import React, { useState } from "react";
 import useSWR, { mutate } from "swr";
+
 
 /* -------------------- Fetcher -------------------- */
 const fetcher = async (url) => {
