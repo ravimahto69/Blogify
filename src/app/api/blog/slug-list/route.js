@@ -1,7 +1,7 @@
-import "@/lib/db"
+
 import { NextResponse as res } from "next/server"
 import BlogSchema from "@/schema/blog.schema"
-
+import "@/lib/db"
 
 export const GET = async(req) =>{
     const titles = await BlogSchema.distinct("title")

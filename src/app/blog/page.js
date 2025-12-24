@@ -1,18 +1,29 @@
 import Blog from '@/components/Blog';
 
 export const metadata = {
-  title: "Blog"
+  title: "Blog",
 };
 
-const blog = async () => {
-  const res = await fetch(`${process.env.SERVER}/api/blog`, {
-    next: { revalidate: 600 }, // Revalidate every 24 hours
-  });
-  let data = null
-  if(!blog.ok)
-    data = []
-   data = await res.json();
+const BlogPage = async () => {
+  let data = [];
+
+  try {
+    const res = await fetch(`${process.env.SERVER}/api/blog`, {
+      next: { revalidate: 600 }, // 10 minutes
+    });
+
+    if (!res.ok) {
+      console.error("Failed to fetch blogs");
+      return <Blog data={[]} />;
+    }
+
+    data = await res.json();
+  } catch (error) {
+    console.error("Fetch error:", error);
+    data = [];
+  }
+
   return <Blog data={data} />;
 };
 
-export default blog;
+export default BlogPage;
