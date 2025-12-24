@@ -3,7 +3,7 @@ import Slug from "@/components/Slug";
 
 export const generateMetadata = ({params}) =>{
   return {
-    title:`Ravi-Blog-`+params.slug
+    title:`Blogify-Blog-`+params.slug
   }
 }
 // Dynamic Route Component
