@@ -1,7 +1,7 @@
 import SignUp from '@/components/Sign-up'
 
 export const metadata ={
-  title : "SignUp"
+  title : "Blogify | SignUp"
 }
 const Sign_up = () => {
   return (

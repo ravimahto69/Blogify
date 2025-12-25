@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export const middleware = (request) => {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get("acessToken")?.value;
+  const token = request.cookies.get("accessToken")?.value;
 
   // If trying to access admin routes without token, redirect to login
   if (pathname.startsWith("/admin") && !token) {

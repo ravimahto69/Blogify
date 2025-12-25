@@ -1,31 +1,34 @@
 import Slug from "@/components/Slug";
+import BlogSchema from "@/schema/blog.schema";
+import dbConnect from "@/lib/db";
 
-// Force runtime rendering
-export const dynamic = "force-dynamic";
-
+/* 🔥 PAGE TITLE (SEO) */
 export async function generateMetadata({ params }) {
+  const { slug } = await params; // ✅ Next.js 15 rule
+
+  const titleFromSlug = slug.replace(/-/g, " ");
+
   return {
-    title: `Blogify - ${params.slug}`,
-    description: `Read blog ${params.slug} on Blogify`,
+    title: `Blogify | ${titleFromSlug}`,
+    description: `${titleFromSlug} explained in simple words on Blogify.`,
   };
 }
 
+/* 🔥 PAGE CONTENT */
 const SlugRoute = async ({ params }) => {
-  try {
-    const res = await fetch(`/api/blog/${params.slug}`, {
-      cache: "no-store",
-    });
+  const { slug } = await params;
 
-    if (!res.ok) {
-      return <Slug title={params.slug} data={null} />;
-    }
+  await dbConnect();
 
-    const data = await res.json();
-    return <Slug title={params.slug} data={data} />;
-  } catch (error) {
-    console.error("Blog fetch error:", error);
-    return <Slug title={params.slug} data={null} />;
-  }
+  const title = slug.replace(/-/g, " ");
+  const blog = await BlogSchema.findOne({ title });
+
+  return (
+    <Slug
+      title={slug}
+      data={JSON.parse(JSON.stringify(blog))}
+    />
+  );
 };
 
 export default SlugRoute;

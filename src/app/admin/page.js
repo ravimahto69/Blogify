@@ -1,7 +1,7 @@
 import Admin from "@/components/Admin"
 
 export const metadata = {
-  title:"Admin"
+  title:"Blogify | Admin"
 }
 
 const AdminRoute = () => {

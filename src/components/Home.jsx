@@ -8,8 +8,8 @@ import axios from "axios"
 const { Title, Paragraph } = Typography
 
 const fetcher = async (url) => {
-  const { data } = await axios.get(url)
-  return data
+  const res = await axios.get(url)
+  return res.data  // 👈 extract array correctly
 }
 
 const Home = () => {

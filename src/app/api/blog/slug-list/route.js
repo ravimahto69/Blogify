@@ -1,10 +1,21 @@
+import { NextResponse } from "next/server";
+import BlogSchema from "@/schema/blog.schema";
+import connectDB from "@/lib/db";
 
-import { NextResponse as res } from "next/server"
-import BlogSchema from "@/schema/blog.schema"
-import "@/lib/db"
+export const GET = async () => {
+  try {
+    await connectDB(); // ✅ connect only at runtime
 
-export const GET = async(req) =>{
-    const titles = await BlogSchema.distinct("title")
-    const slugs = titles.map((item)=>item.split(" ").join("-"))
-    return res.json({slugs})
-}
+    const titles = await BlogSchema.distinct("title");
+    const slugs = titles.map((item) =>
+      item.toLowerCase().replace(/\s+/g, "-")
+    );
+
+    return NextResponse.json({ slugs });
+  } catch (error) {
+    console.error("slug-list error:", error);
+    return NextResponse.json({ slugs: [] }, { status: 500 });
+  }
+};
+
+

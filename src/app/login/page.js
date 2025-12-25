@@ -1,12 +1,12 @@
-import Login from '@/components/Login'
 
+import Login from '@/components/Login'
 export const metadata ={
-  title : 'LoginPage'
+  title : 'Blogify | Login'
 }
-const login = () => {
+const LoginPage = () => {
   return (
     <div><Login/></div>
   )
 }
 
-export default login
+export default LoginPage

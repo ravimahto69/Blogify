@@ -3,7 +3,7 @@ import Home from '@/components/Home'
 
 
 export const metadata ={
-  title : 'Home'
+  title : 'Blogify | Home'
 }
 
 const HomePage = () => {

@@ -1,29 +1,17 @@
-import Blog from '@/components/Blog';
+import Blog from "@/components/Blog";
+import BlogSchema from "@/schema/blog.schema";
+import dbConnect from "@/lib/db";
 
 export const metadata = {
-  title: "Blog",
+  title: "Blogify | Blog",
 };
 
 const BlogPage = async () => {
-  let data = [];
+  await dbConnect();
 
-  try {
-    const res = await fetch(`${process.env.SERVER}/api/blog`, {
-      next: { revalidate: 600 }, // 10 minutes
-    });
+  const data = await BlogSchema.find().sort({ createdAt: -1 });
 
-    if (!res.ok) {
-      console.error("Failed to fetch blogs");
-      return <Blog data={[]} />;
-    }
-
-    data = await res.json();
-  } catch (error) {
-    console.error("Fetch error:", error);
-    data = [];
-  }
-
-  return <Blog data={data} />;
+  return <Blog data={JSON.parse(JSON.stringify(data))} />;
 };
 
 export default BlogPage;
