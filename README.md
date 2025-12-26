@@ -93,12 +93,3 @@ Next.js App Router
      ▼
  MongoDB Database
 
-
-## Screeenshot
-
-<img width="1920" height="1080" alt="Screenshot 2025-12-26 142039" src="https://github.com/user-attachments/assets/3c02a61b-cb59-4139-9d55-8293808e4f03" />
-<img width="1920" height="1080" alt="Screenshot 2025-12-26 142105" src="https://github.com/user-attachments/assets/f5b524d6-00d0-4463-bbdc-6a87b7bd9514" />
-<img width="1920" height="1080" alt="Screenshot 2025-12-26 142131" src="https://github.com/user-attachments/assets/c95c71c8-f2fe-4702-9942-f50f9e3b63eb" />
-<img width="1920" height="1080" alt="Screenshot 2025-12-26 142240" src="https://github.com/user-attachments/assets/1fa5a05c-c2f8-425f-a577-923953802386" />
-<img width="1920" height="1080" alt="Screenshot 2025-12-26 142318" src="https://github.com/user-attachments/assets/e1bdbaa9-9d18-4834-8b5e-16e644468ec3" />
-
